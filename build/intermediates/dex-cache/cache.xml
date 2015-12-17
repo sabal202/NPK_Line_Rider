@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\Sergey\AndroidStudioProjects\HelloOpenCV3\helloOpenCV\build\intermediates\exploded-aar\HelloOpenCV3\openCVLibrary300\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="02415ae775e526c36e7eb81a4173ede56601c081">
+        <dex dex="C:\Users\Sergey\AndroidStudioProjects\HelloOpenCV3\helloOpenCV\build\intermediates\pre-dexed\debug\classes-49383518601a08436e28e65ac7566df4c0bed179.jar" />
+    </item>
+
+</items>

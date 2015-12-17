@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="D:\NPK_Line_Rider\helloOpenCV\build\intermediates\exploded-aar\NPK_Line_Rider\openCVLibrary300\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="1b52a7ffc5e60bb2db7c5898f0d77e022f7266d2">
+        <dex dex="D:\NPK_Line_Rider\helloOpenCV\build\intermediates\pre-dexed\debug\classes-b5eb87ffd74c791e06a57fd81099ce0aa367d850.jar" />
+    </item>
+
+</items>

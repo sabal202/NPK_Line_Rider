@@ -36,7 +36,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        <activity android:name="com.sabal.helloopencv.SetDeviceActivity" >
+        <activity android:name="com.sabal.opencv.SetDeviceActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,10 +44,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.sabal.helloopencv.OpenCVMainActivity"
+            android:name="com.sabal.opencv.OpenCVMainActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name"
             android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="com.sabal.opencv.SetTypeActivity"
+            android:label="@string/title_activity_set_type" >
         </activity>
     </application>
 

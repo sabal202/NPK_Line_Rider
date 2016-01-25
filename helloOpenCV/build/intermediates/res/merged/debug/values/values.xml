@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/D:/NPK_Line_Rider/helloOpenCV/src/main/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/Maxim/Desktop/Projects/NPK_Line_Rider/helloOpenCV/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="BLACK">#000000</color>
     <color name="DARK_BLUE">#0000FF</color>
@@ -10,13 +10,14 @@
     <color name="RED_EV3">#FF0000</color>
     <color name="WHITE">#FFFFFF</color>
     <declare-styleable name="CameraBridgeViewBase"><attr format="boolean" name="show_fps"/><attr format="integer" name="camera_id"><enum name="any" value="-1"/><enum name="back" value="99"/><enum name="front" value="98"/></attr></declare-styleable>
-    <!-- From: file:/D:/NPK_Line_Rider/helloOpenCV/src/main/res/values/dimens.xml -->
+    <!-- From: file:/C:/Users/Maxim/Desktop/Projects/NPK_Line_Rider/helloOpenCV/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <!-- From: file:/D:/NPK_Line_Rider/helloOpenCV/src/main/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/Maxim/Desktop/Projects/NPK_Line_Rider/helloOpenCV/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="action_settings">Settings</string>
     <string name="app_name">НПК</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_set_type">SetTypeActivity</string>
 </resources>

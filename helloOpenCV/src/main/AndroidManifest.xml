@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sabal.helloopencv"
     android:versionCode="1"
-    android:versionName="1.0">
+    android:versionName="1.0" >
 
     <supports-screens
         android:anyDensity="true"
@@ -31,22 +31,24 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-        <activity android:name=".SetDeviceActivity">
+        android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+        <activity android:name="com.sabal.opencv.SetDeviceActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".OpenCVMainActivity"
+            android:name="com.sabal.opencv.OpenCVMainActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name"
-            android:screenOrientation="landscape">
-
+            android:screenOrientation="landscape" >
         </activity>
-
+        <activity
+            android:name="com.sabal.opencv.SetTypeActivity"
+            android:label="@string/title_activity_set_type" >
+        </activity>
     </application>
-
 
 </manifest>

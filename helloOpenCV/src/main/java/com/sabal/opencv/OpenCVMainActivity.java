@@ -1,4 +1,4 @@
-package com.sabal.helloopencv;
+package com.sabal.opencv;
 
 //import static org.opencv.android.BaseLoaderCallback.TAG;
 
@@ -6,7 +6,6 @@ import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
-import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 
@@ -30,8 +29,6 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -42,6 +39,8 @@ import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.sabal.helloopencv.R;
 
 @SuppressLint("ResourceAsColor")
 public class OpenCVMainActivity extends Activity implements CvCameraViewListener2 {

@@ -46,19 +46,18 @@ import com.sabal.helloopencv.R;
 public class OpenCVMainActivity extends Activity implements CvCameraViewListener2 {
 	private CameraBridgeViewBase mOpenCvCameraView;
 	private Mat mIntermediateMat;
-	private int mHistSizeNum = 25, power = 50, pin = 87, real_power = 45,sto=45,minU=45;
+	private int  power = 50, pin = 87,sto=45, minU=45;
 	Point p, p1, p2, p3, p4;
-	double Dif = 0, k = 0.35, c1, c2, ok = 0, Const = 1.0,cosa=1;
+	double Dif = 0, k = 0.35, c1, c2;
 	public SeekBar Kof, nip, pow,pop;
 	public TextView PowerA, DifA, pinnetta, reverer,popo;
 	public int AWP = 0, prevU, prevD, revelog = 1;
-	public EV3Controller Controller;
+	public Robot2WD Controller;
 	boolean BTconnected = false;
 	int CAMERA_MODE = 0;
 	public Switch Rever;
 	boolean click = false;
 	final int DifGearKof = 2;
-// dct jxtym gkj[j
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -67,8 +66,6 @@ public class OpenCVMainActivity extends Activity implements CvCameraViewListener
 		setContentView(R.layout.helloopencvlayout);
 		mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.HelloOpenCvView);
 		mOpenCvCameraView.setMaxFrameSize(800, 480);
-		/*mOpenCvCameraView.setScaleX(480);
-		mOpenCvCameraView.setScaleY(368);*/
 		ToScreen(Integer.toString(mOpenCvCameraView.getHeight()));
 
 		mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
@@ -104,21 +101,21 @@ public class OpenCVMainActivity extends Activity implements CvCameraViewListener
 				}
 			}
 		});
-//ff
-		Controller = new EV3Controller();
 
-		String Device = getIntent().getExtras().getString("key", "null");
-		ToScreen(Device);
-		BTconnected = Controller.ConnectToBT(Device);
+		int typeId = getIntent().getExtras().getInt("Type");
+		switch(typeId){
+			case 0:
+				Controller = new EV3Controller();break;
+			case 1:
+				Controller = new ArduinoController();break;
+			case 2:
+				Controller = new NXTController();
+		}
+
+		String Device = getIntent().getExtras().getString("Device Name", "null");
+		BTconnected = Controller.Connect(Device);
 
 		if (BTconnected) {
-			/*
-			 * ToScreen("\n     Connected     \n"); try {
-			 * Controller.MotorPowerSet((byte) 0x08, (byte) -10);
-			 * Controller.MotorPowerOn((byte) 0x08);
-			 * Controller.MotorPowerOn((byte) 0x06); } catch (IOException e1) {
-			 * e1.printStackTrace(); }
-			 */
 			mOpenCvCameraView.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -127,14 +124,14 @@ public class OpenCVMainActivity extends Activity implements CvCameraViewListener
 					if (click) {
 						click = false;
 						try {
-							Controller.MotorPowerOff((byte) 0x06);
+							Controller.MotorsPowerOff();
 						} catch (IOException e1) {
 							e1.printStackTrace();
 						}
 					} else {
 						click = true;
 						try {
-							Controller.MotorPowerOn((byte) 0x06);
+							Controller.MotorsPowerOn();
 						} catch (IOException e1) {
 							e1.printStackTrace();
 						}
@@ -142,7 +139,6 @@ public class OpenCVMainActivity extends Activity implements CvCameraViewListener
 				}
 			});
 		} else {
-			Log.v("ahaahahahahaahha", "else");
 			ToScreen("\n     No Bluetooth connection with " + Device + "     \n");
 			OpenCVMainActivity.this.finish();
 		}
@@ -234,8 +230,7 @@ public class OpenCVMainActivity extends Activity implements CvCameraViewListener
 
 		prevD = (int) c2;
 		prevU = (int) c1;
-//		double u=c1-(mOpenCvCameraView.getHeight() / 2) ;
-//		cosa=Math.abs(p1.x - p3.x)/(Math.sqrt(Math.pow(c2 - c1 , 2) + Math.pow((p1.x - p3.x),2)));
+		
 		Imgproc.arrowedLine(rgbaInnerWindow, new Point(p1.x, c1), new Point(p3.x, c2), new Scalar(0, 0, 255, 255), 13,
                 4, 0, 0.2);
 		Imgproc.line(rgbaInnerWindow, new Point(p1.x, c1), new Point(p1.x, c1), new Scalar(255, 0, 0, 255), 20);
@@ -262,8 +257,7 @@ public class OpenCVMainActivity extends Activity implements CvCameraViewListener
                 powerC = -maxPower;
 
         try {
-            Controller.MotorPowerSet((byte) 0x02, (byte) powerB);
-            Controller.MotorPowerSet((byte) 0x04, (byte) powerC);
+            Controller.MotorsPowerSet((byte) powerB, (byte) powerC);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -324,8 +318,7 @@ public class OpenCVMainActivity extends Activity implements CvCameraViewListener
 			mOpenCvCameraView.disableView();
 		if (BTconnected) {
 			try {
-				Controller.MotorPowerSet((byte)0x06, (byte)0);
-				Controller.MotorPowerOff((byte) 0x06);
+				Controller.MotorsPowerOff();
 				Controller.Disconnect();
 			} catch (IOException e) {
 				e.printStackTrace();

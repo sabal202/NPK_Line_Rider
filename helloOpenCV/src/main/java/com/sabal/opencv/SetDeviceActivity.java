@@ -51,8 +51,8 @@ public class SetDeviceActivity extends Activity {
         ChooseDev.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Device = imena[position];
-                Intent intent = new Intent(SetDeviceActivity.this, OpenCVMainActivity.class);
-                intent.putExtra("key", Device);
+                Intent intent = new Intent(SetDeviceActivity.this, SetTypeActivity.class);
+                intent.putExtra("Device Name", Device);
                 startActivity(intent);
                 finish();
             }

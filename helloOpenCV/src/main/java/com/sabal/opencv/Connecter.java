@@ -11,14 +11,14 @@ import java.util.Set;
 /**
  * Created by Maxim on 25.01.2016.
  */
-public class Connecter extends Object{
+public class Connecter extends Object {
 
     public OutputStream Outstream;
     public BluetoothDevice device;
     public BluetoothAdapter bluetooth;
     BluetoothSocket socket;
 
-    public boolean Connect(String name) {
+    public boolean Connect(String name) throws IOException {
 
         bluetooth = BluetoothAdapter.getDefaultAdapter();
 
@@ -31,26 +31,14 @@ public class Connecter extends Object{
             return false;
         }
 
-        try {
-            socket = device.createInsecureRfcommSocketToServiceRecord(device.getUuids()[0].getUuid());
-            socket.connect();
-            Outstream = socket.getOutputStream();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return false;
-        }
-
-        return true;
-
+        socket = device.createInsecureRfcommSocketToServiceRecord(device.getUuids()[0].getUuid());
+        socket.connect();
+        Outstream = socket.getOutputStream();
+        
+        return Outstream != null;
     }
 
-    public void Disconnect () {
-        try {
-            socket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void Disconnect () throws IOException {
+        socket.close();
     }
-
 }

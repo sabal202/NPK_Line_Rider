@@ -1,34 +1,7 @@
 package com.sabal.opencv;
-
-//import static org.opencv.android.BaseLoaderCallback.TAG;
-
-import org.opencv.android.BaseLoaderCallback;
-import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
-import org.opencv.android.LoaderCallbackInterface;
-import org.opencv.android.OpenCVLoader;
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
-
-import org.opencv.core.MatOfPoint;
-import org.opencv.core.MatOfPoint2f;
-import org.opencv.core.Point;
-import org.opencv.core.Scalar;
-import org.opencv.core.Size;
-import org.opencv.android.CameraBridgeViewBase;
-import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
-import org.opencv.imgproc.Imgproc;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-
 import android.os.Bundle;
-import android.util.Log;
-
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.List;
-
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -42,8 +15,29 @@ import android.widget.Toast;
 
 import com.sabal.helloopencv.R;
 
+import org.opencv.android.BaseLoaderCallback;
+import org.opencv.android.CameraBridgeViewBase;
+import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
+import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
+import org.opencv.android.LoaderCallbackInterface;
+import org.opencv.android.OpenCVLoader;
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfPoint;
+import org.opencv.core.MatOfPoint2f;
+import org.opencv.core.Point;
+import org.opencv.core.Scalar;
+import org.opencv.core.Size;
+import org.opencv.imgproc.Imgproc;
+
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.List;
+
 @SuppressLint("ResourceAsColor")
-public class OpenCVMainActivity extends Activity implements CvCameraViewListener2 {
+public class Main extends Activity implements CvCameraViewListener2 {
 	private CameraBridgeViewBase mOpenCvCameraView;
 	private Mat mIntermediateMat;
 	private int  power = 50, pin = 87,sto=45, minU=45;
@@ -51,7 +45,7 @@ public class OpenCVMainActivity extends Activity implements CvCameraViewListener
 	double Dif = 0, k = 0.35, c1, c2;
 	public SeekBar Kof, nip, pow,pop;
 	public TextView PowerA, DifA, pinnetta, reverer,popo;
-	public int AWP = 0, prevU, prevD, revelog = 1;
+	public int prevU, prevD, revelog = 1;
 	public Robot2WD Controller;
 	boolean BTconnected = false;
 	int CAMERA_MODE = 0;
@@ -93,7 +87,6 @@ public class OpenCVMainActivity extends Activity implements CvCameraViewListener
 
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				// TODO Auto-generated method stub
 				if (isChecked) {
 					revelog = -1;
 				} else {
@@ -105,22 +98,25 @@ public class OpenCVMainActivity extends Activity implements CvCameraViewListener
 		int typeId = getIntent().getExtras().getInt("Type");
 		switch(typeId){
 			case 0:
-				Controller = new EV3Controller();break;
+				Controller = new EV3();break;
 			case 1:
-				Controller = new ArduinoController();break;
+				Controller = new Arduino();break;
 			case 2:
-				Controller = new NXTController();
+				Controller = new NXT();
 		}
 
 		String Device = getIntent().getExtras().getString("Device Name", "null");
-		BTconnected = Controller.Connect(Device);
+		try {
+			BTconnected = Controller.Connect(Device);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		if (BTconnected) {
 			mOpenCvCameraView.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View arg0) {
-					// TODO Auto-generated method stub
 					if (click) {
 						click = false;
 						try {
@@ -139,8 +135,8 @@ public class OpenCVMainActivity extends Activity implements CvCameraViewListener
 				}
 			});
 		} else {
-			ToScreen("\n     No Bluetooth connection with " + Device + "     \n");
-			OpenCVMainActivity.this.finish();
+			ToScreen("\nNo Bluetooth connection with " + Device + "\n");
+			Main.this.finish();
 		}
 
 		prevU = mOpenCvCameraView.getHeight() / 2;

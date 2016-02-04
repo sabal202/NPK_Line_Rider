@@ -11,17 +11,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.content.Intent;
-
 import com.sabal.helloopencv.R;
-
 import java.util.Set;
 
 
-public class SetDeviceActivity extends Activity {
+public class SetDevice extends Activity {
 
     public ListView ChooseDev;
     public String Device;
-    public EV3Controller contrl = new EV3Controller();
+    public EV3 contrl = new EV3();
     public String imena [] = null;
 
 
@@ -34,8 +32,8 @@ public class SetDeviceActivity extends Activity {
 
         BluetoothAdapter bluetoothe = BluetoothAdapter.getDefaultAdapter();
         if(!bluetoothe.isEnabled()) {
-        	ToScreen("\n     Switch on BlueTooth, please!     \n");
-			SetDeviceActivity.this.finish();        	
+        	ToScreen("\nSwitch on BlueTooth, please!\n");
+			SetDevice.this.finish();
         }
         final Set<BluetoothDevice> DevList = bluetoothe.getBondedDevices();
         imena = new String [DevList.size()];
@@ -51,7 +49,7 @@ public class SetDeviceActivity extends Activity {
         ChooseDev.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Device = imena[position];
-                Intent intent = new Intent(SetDeviceActivity.this, SetTypeActivity.class);
+                Intent intent = new Intent(SetDevice.this, SetType.class);
                 intent.putExtra("Device Name", Device);
                 startActivity(intent);
                 finish();

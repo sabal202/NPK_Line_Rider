@@ -1,17 +1,8 @@
 package com.sabal.opencv;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Set;
 
-import android.bluetooth.*;
-import android.content.Context;
-import android.util.Log;
-import android.widget.SeekBar;
-import android.widget.Toast;
-
-public class EV3Controller extends Connecter implements Robot2WD{
+public class EV3 extends Connecter implements Robot2WD{
 
     public void MotorsPowerOn() throws IOException {
         byte ke1[] = {0x08, 0x00, 0x00, 0x00, (byte) 0x80, 0x00, 0x00, (byte) 0xA6, 0x00, 0x02};

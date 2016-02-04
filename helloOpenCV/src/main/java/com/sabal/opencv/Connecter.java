@@ -8,9 +8,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Set;
 
-/**
- * Created by Maxim on 25.01.2016.
- */
 public class Connecter extends Object {
 
     public OutputStream Outstream;

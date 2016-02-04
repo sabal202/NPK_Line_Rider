@@ -3,8 +3,6 @@ package com.sabal.opencv;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
@@ -13,7 +11,7 @@ import android.widget.Toast;
 
 import com.sabal.helloopencv.R;
 
-public class SetTypeActivity extends Activity {
+public class SetType extends Activity {
 
     String Types[] = {"LEGO Mindstorms EV3","Arduino 2WD Robot","LEGO Mindstorms NXT"};
     ListView ChooseType;
@@ -32,7 +30,7 @@ public class SetTypeActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 ToScreen(Integer.toString(i+1));
-                Intent intent = new Intent(SetTypeActivity.this, OpenCVMainActivity.class);
+                Intent intent = new Intent(SetType.this, Main.class);
                 intent.putExtra("Device Name", getIntent().getExtras().getString("Device Name","null"));
                 intent.putExtra("Type",i);
                 startActivity(intent);

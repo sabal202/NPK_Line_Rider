@@ -45,13 +45,11 @@ public class Main extends Activity implements CvCameraViewListener2 {
 	double Dif = 0, k = 0.35, c1, c2;
 	public SeekBar Kof, nip, pow,pop;
 	public TextView PowerA, DifA, pinnetta, reverer,popo;
-	public int prevU, prevD, revelog = 1;
+	public int prevU, prevD, revelog = 1,maxPower = 70;
 	public Robot2WD Controller;
 	boolean BTconnected = false;
-	int CAMERA_MODE = 0;
 	public Switch Rever;
 	boolean click = false;
-	final int DifGearKof = 2;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -233,21 +231,20 @@ public class Main extends Activity implements CvCameraViewListener2 {
 		Imgproc.line(rgbaInnerWindow, new Point(p3.x, c2), new Point(p3.x, c2), new Scalar(255, 0, 0, 255), 20);
 
         	Dif = k * (c1 - mOpenCvCameraView.getHeight() / 2);
-        	int powerB = power + (int)Dif;
-        	int powerC = power - (int)Dif;
+        	int PowerA = power + (int)Dif;
+        	int PowerB = power - (int)Dif;
 
-        	final int maxPower = 30;
-        	if(powerB > maxPower)
-            		powerB = maxPower;
-        	else if(powerB < -maxPower)
-              		powerB = -maxPower;
-        	if(powerC > maxPower)
-            		powerC = maxPower;
-        	else if(powerC < -maxPower)
-                	powerC = -maxPower;
+        	if(PowerA > maxPower)
+            		PowerA = maxPower;
+        	else if(PowerA < -maxPower)
+              		PowerA = -maxPower;
+        	if(PowerB > maxPower)
+            		PowerB = maxPower;
+        	else if(PowerB < -maxPower)
+                	PowerB = -maxPower;
 
         	try {
-            		Controller.MotorsPowerSet((byte) powerB, (byte) powerC);
+            		Controller.MotorsPowerSet((byte) PowerA, (byte) PowerB);
         	} catch (IOException e) {
         		   e.printStackTrace();
         	}
@@ -363,26 +360,24 @@ public class Main extends Activity implements CvCameraViewListener2 {
 			PowerA.setText(Integer.toString(power));
 		}
 	};
+
 	private SeekBar.OnSeekBarChangeListener popopo = new SeekBar.OnSeekBarChangeListener() {
 		@Override
 		public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-			sto = pop.getProgress();
-			minU = sto;
-			popo.setText(Integer.toString(sto-20));
+			maxPower = pop.getProgress();
+			popo.setText(Integer.toString(maxPower));
 		}
 
 		@Override
 		public void onStartTrackingTouch(SeekBar seekBar) {
-			sto = pop.getProgress();
-			minU = sto;
-			popo.setText(Integer.toString(sto-20));
+			maxPower = pop.getProgress();
+			popo.setText(Integer.toString(maxPower));
 		}
 
 		@Override
 		public void onStopTrackingTouch(SeekBar seekBar) {
-			sto = pop.getProgress();
-			minU = sto;
-			popo.setText(Integer.toString(sto-20));
+			maxPower = pop.getProgress();
+			popo.setText(Integer.toString(maxPower));
 		}
 	};
 	

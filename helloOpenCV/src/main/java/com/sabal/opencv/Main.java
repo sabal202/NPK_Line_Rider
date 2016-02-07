@@ -232,70 +232,28 @@ public class Main extends Activity implements CvCameraViewListener2 {
 		Imgproc.line(rgbaInnerWindow, new Point(p1.x, c1), new Point(p1.x, c1), new Scalar(255, 0, 0, 255), 20);
 		Imgproc.line(rgbaInnerWindow, new Point(p3.x, c2), new Point(p3.x, c2), new Scalar(255, 0, 0, 255), 20);
 
-		if(Math.abs(Dif) < k * 100 * k) Dif = (0.5*mOpenCvCameraView.getHeight()-(c1-c2))/2;
-		else Dif = k * (c1 - c2);
+        	Dif = k * (c1 - mOpenCvCameraView.getHeight() / 2);
+        	int powerB = power + (int)Dif;
+        	int powerC = power - (int)Dif;
 
+        	final int maxPower = 30;
+        	if(powerB > maxPower)
+            		powerB = maxPower;
+        	else if(powerB < -maxPower)
+              		powerB = -maxPower;
+        	if(powerC > maxPower)
+            		powerC = maxPower;
+        	else if(powerC < -maxPower)
+                	powerC = -maxPower;
 
-        Dif = k * (c1 - mOpenCvCameraView.getHeight() / 2);
-        int powerB = power + (int)Dif;
-        int powerC = power - (int)Dif;
-
-        final int maxPower = 30;
-        if(powerB > maxPower)
-            powerB = maxPower;
-        else
-          if(powerB < -maxPower)
-              powerB = -maxPower;
-        if(powerC > maxPower)
-            powerC = maxPower;
-        else
-            if(powerC < -maxPower)
-                powerC = -maxPower;
-
-        try {
-            Controller.MotorsPowerSet((byte) powerB, (byte) powerC);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-		/*if (Math.abs(c1 - c2) < sto * k && Math.abs(mOpenCvCameraView.getHeight() / 2 - Math.abs(c1))>5 && Math.abs(mOpenCvCameraView.getHeight() / 2 - Math.abs(c2))>5)
-			Dif = k * k * (mOpenCvCameraView.getHeight() / 2 - c1);
-		else
-			// Dif = k * (c1 - c2);
-			Dif = k * (mOpenCvCameraView.getHeight() / 2 - c1) / 2;
-
-		if (power + Math.abs(Dif) > 100) {
-			real_power = (int) Math.abs(100 - Math.abs(Dif));
-		}
-		try {
-			Controller.MotorPowerSet((byte) 0x02, (byte) (revelog * (real_power + Dif/DifGearKof)));
-			Controller.MotorPowerSet((byte) 0x04, (byte) (revelog * (real_power - Dif/DifGearKof)));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		/*Dif = (mOpenCvCameraView.getHeight()/2 - c1) * 20 * k;
-		try {
-			if(Math.abs(u)< 4){
-				Controller.MotorPowerSet((byte) 0x02, (byte) (revelog*(power + Dif)));
-				Controller.MotorPowerSet((byte) 0x04, (byte) (revelog*(power - Dif)));
-			}
-			if(u<=-4){
-				Controller.MotorPowerSet((byte) 0x02, (byte) (revelog*power));
-				Controller.MotorPowerSet((byte) 0x04, (byte) ((int)(revelog*((power-minU)*cosa + minU))));
-			}
-			if(u>=4){
-				Controller.MotorPowerSet((byte) 0x02, (byte) ((int)(revelog*((power-minU)*cosa + minU))));
-				Controller.MotorPowerSet((byte) 0x04, (byte) (revelog*power));
-			}
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}*/
+        	try {
+            		Controller.MotorsPowerSet((byte) powerB, (byte) powerC);
+        	} catch (IOException e) {
+        		   e.printStackTrace();
+        	}
 		
 		Imgproc.line(rgbaInnerWindow, new Point(0, rows), new Point(0, 0), new Scalar(200, 200, 200, 255), 1);
-		Imgproc.line(rgbaInnerWindow, new Point(width - 1, rows), new Point(width - 1, 0),
-				new Scalar(200, 200, 200, 255), 1);
-		// Imgproc.cvtColor(greyInnerWindow, rgbaInnerWindow,
-		// Imgproc.COLOR_GRAY2RGBA);
+		Imgproc.line(rgbaInnerWindow, new Point(width - 1, rows), new Point(width - 1, 0), new Scalar(200, 200, 200, 255), 1);
 		rgbaInnerWindow.release();
 		return rgba;
 	}

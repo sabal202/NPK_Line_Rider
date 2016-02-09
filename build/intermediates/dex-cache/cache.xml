@@ -2,11 +2,11 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Maxim\Desktop\Projects\NPK_Line_Rider\helloOpenCV\build\intermediates\exploded-aar\NPK_Line_Rider\openCVLibrary300\unspecified\jars\classes.jar"
+        jar="D:\gone\NPK_Line_Rider\helloOpenCV\build\intermediates\exploded-aar\NPK_Line_Rider\openCVLibrary300\unspecified\jars\classes.jar"
         jumboMode="false"
         revision="23.0.2"
-        sha1="9c214d9199df51d7b2c9e06cb5cef5a4616531b3">
-        <dex dex="C:\Users\Maxim\Desktop\Projects\NPK_Line_Rider\helloOpenCV\build\intermediates\pre-dexed\debug\classes-5996ca198debf2c9fae582d8a1b538313ec77764.jar" />
+        sha1="d7f76822f1b534fcb52e57fae60d04f36366a311">
+        <dex dex="D:\gone\NPK_Line_Rider\helloOpenCV\build\intermediates\pre-dexed\debug\classes-3203edd930f550a31703dafe40d6aef2fe18146f.jar" />
     </item>
 
 </items>

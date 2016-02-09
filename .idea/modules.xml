@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/NPKMain/NPKMain.iml" filepath="$PROJECT_DIR$/NPKMain/NPKMain.iml" />
       <module fileurl="file://$PROJECT_DIR$/NPK_Line_Rider.iml" filepath="$PROJECT_DIR$/NPK_Line_Rider.iml" />
-      <module fileurl="file://$PROJECT_DIR$/helloOpenCV/helloOpenCV.iml" filepath="$PROJECT_DIR$/helloOpenCV/helloOpenCV.iml" />
       <module fileurl="file://$PROJECT_DIR$/openCVLibrary300/openCVLibrary300.iml" filepath="$PROJECT_DIR$/openCVLibrary300/openCVLibrary300.iml" />
     </modules>
   </component>
